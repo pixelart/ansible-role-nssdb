@@ -1,5 +1,28 @@
 ---
 - hosts: localhost
   remote_user: root
+
+  vars:
+    ca_certificates_trusted:
+      - { pem: "{{ cacert_pem.content }}", name: cacert }
+
+    nssdb_users: ['{{ ansible_user }}']
+    nssdb_certificates:
+      - name: CA Cert Signing Authority - Root CA
+        path: '{{ ca_certificates_local_dir }}/cacert.crt'
+        trust: CT,C,C
+
+  pre_tasks:
+    - name: Download CA Cert Signing Authority
+      uri:
+        url: 'http://www.cacert.org/certs/root.crt'
+        return_content: true
+      register: cacert_pem
+
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_distribution == 'Ubuntu'
+
   roles:
-    - ansible-role-nssdb
+    - bdellegrazie.ca-certificates
+    - role_under_test
