@@ -75,6 +75,10 @@ None, but you can use `bdellegrazie.ca-certificates` to transfer the certificate
 
 After the playbook runs the certificates are installed in the system-wide and users nssdb and also concatenated into the `ca-certficates.crt` for curl, php and so on.
 
+## Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
 ## License
 
 MIT, see the [LICENSE](LICENSE) file.
