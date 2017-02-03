@@ -42,7 +42,7 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Ensure the CACert CA is installed system-wide.
-  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm certutil -L -d sql:/etc/pki/nssdb'
+  - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm certutil -L -d sql:/etc/pki/nssdb | grep "CA Cert Signing Authority"'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
