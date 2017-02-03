@@ -12,7 +12,7 @@
 
 - name: Create system-wide {{ nssdb_system_path }} folder
   file:
-    dest: '{{ nssdb_system_path }}'
+    path: '{{ nssdb_system_path }}'
     state: directory
   register: nssdb_folder_created
   when: nssdb_stat is defined and nssdb_stat.exists == false

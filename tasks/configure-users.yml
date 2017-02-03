@@ -18,7 +18,7 @@
   become: true
   become_user: '{{ nssdb_user }}'
   file:
-    dest: '/home/{{ nssdb_user }}/.pki/nssdb'
+    path: '/home/{{ nssdb_user }}/.pki/nssdb'
     state: directory
   register: nssdb_folder_created_user
   when: nssdb_stat_user is defined and nssdb_stat_user.exists == false
