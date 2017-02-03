@@ -6,7 +6,8 @@
   failed_when: false
 
 - name: Check if system-wide {{ nssdb_system_path }} folder is there
-  stat: '{{ nssdb_system_path }}'
+  stat:
+    path: '{{ nssdb_system_path }}'
   register: nssdb_stat
   when: nssdb_exists.rc != 0
 
@@ -15,7 +16,7 @@
     path: '{{ nssdb_system_path }}'
     state: directory
   register: nssdb_folder_created
-  when: nssdb_stat is defined and nssdb_stat.exists == false
+  when: nssdb_stat is defined and nssdb_stat.stat.exists == false
 
 - name: Initialize db in system-wide {{ nssdb_system_path }}
   command: certutil -N -d sql:{{ nssdb_system_path }} --empty-password

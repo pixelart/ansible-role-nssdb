@@ -10,7 +10,8 @@
 - name: Check if users ~{{ nssdb_user }}/.pki/nssdb folder is there
   become: true
   become_user: '{{ nssdb_user }}'
-  stat: '/home/{{ nssdb_user }}/.pki/nssdb'
+  stat:
+    path: '/home/{{ nssdb_user }}/.pki/nssdb'
   register: nssdb_stat_user
   when: nssdb_exists_user.rc != 0
 
@@ -21,7 +22,7 @@
     path: '/home/{{ nssdb_user }}/.pki/nssdb'
     state: directory
   register: nssdb_folder_created_user
-  when: nssdb_stat_user is defined and nssdb_stat_user.exists == false
+  when: nssdb_stat_user is defined and nssdb_stat_user.stat.exists == false
 
 - name: Initialize db in users ~{{ nssdb_user }}/.pki/nssdb
   become: true
