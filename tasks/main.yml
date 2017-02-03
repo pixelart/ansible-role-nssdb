@@ -1,0 +1,28 @@
+---
+# Variable setup.
+- name: Include OS-specific variables.
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Define certutils_package.
+  set_fact:
+    certutils_package: "{{ __certutils_package }}"
+  when: certutils_package is not defined
+
+- name: Define nssdb_system_path.
+  set_fact:
+    nssdb_system_path: "{{ __nssdb_system_path }}"
+  when: nssdb_system_path is not defined
+
+# Setup/install tasks.
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+  static: no
+
+# Configure certs.
+- include: configure-system.yml
+  static: no
+- include: configure-users.yml
+  with_items: '{{ nssdb_users }}'
+  loop_control:
+      loop_var: nssdb_user
+  static: no

@@ -1,0 +1,7 @@
+---
+# The certificates with the trustlevels defined
+nssdb_certificates: []
+
+# certutils package state; use 'installed' to make sure it's installed, or 'latest' if
+# you want to upgrade or switch versions using a new repo.
+certutils_package_state: installed

@@ -1,0 +1,23 @@
+galaxy_info:
+  author: pixelart
+  description: Install certificates into NSS Shared DB
+  company: pixelart GmbH
+
+  license: MIT
+
+  min_ansible_version: 2.2
+
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  - name: Debian
+    versions:
+    - jessie
+
+  galaxy_tags:
+    - ca
+    - certificates
+    - nss
+    - nssdb
+    - system

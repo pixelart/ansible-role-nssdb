@@ -1,0 +1,3 @@
+---
+__certutils_package: libnss3-tools
+__nssdb_system_path: /etc/pki/nssdb

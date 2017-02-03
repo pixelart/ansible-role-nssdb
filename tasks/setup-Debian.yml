@@ -1,0 +1,5 @@
+---
+- name: Ensure certutils package is installed.
+  apt:
+    name: "{{ certutils_package }}"
+    state: "{{ certutils_package_state }}"

@@ -1,0 +1,31 @@
+---
+- name: Check if system-wide {{ nssdb_system_path }} exists
+  command: certutil -L -d sql:{{ nssdb_system_path }}
+  register: nssdb_exists
+  changed_when: false
+  failed_when: false
+
+- name: Check if system-wide {{ nssdb_system_path }} folder is there
+  stat: '{{ nssdb_system_path }}'
+  register: nssdb_stat
+  when: nssdb_exists.rc != 0
+
+- name: Create system-wide {{ nssdb_system_path }} folder
+  file:
+    dest: '{{ nssdb_system_path }}'
+    state: directory
+  register: nssdb_folder_created
+  when: nssdb_stat is defined and nssdb_stat.exists == false
+
+- name: Initialize db in system-wide {{ nssdb_system_path }}
+  command: certutil -N -d sql:{{ nssdb_system_path }} --empty-password
+  when: nssdb_folder_created|changed
+
+- name: Install certificates to system-wide {{ nssdb_system_path }}
+  command: >
+    certutil -A -d 'sql:{{ nssdb_system_path }}'
+    -n '{{ item.name }}'
+    -t '{{ item.trust }}'
+    -i '{{ item.path }}'
+  with_items: '{{ nssdb_certificates }}'
+  changed_when: false
