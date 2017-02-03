@@ -45,6 +45,7 @@ script:
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm certutil -L -d sql:$HOME/.pki/nssdb | grep "CA Cert Signing Authority"'
 
 notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
   slack:
     rooms:
       secure: KW6bLLPkT4vIKfEwlIBMAv/ygEYEch5EEyf+iN4TiYzo4/vxoSVAd8HAWPXMKQhQXtZnQiQD4Z6gyqxlcgai9krDEi30F7k0EL88sHXdXH4hZq8GbPM2kqjE1V0OZkkeNWe0DywCAkD0121croGpP9TpuEhOumIxqDwW6l/+tdodDkrdGB6/bv3XNvIrqTdPEvI9tZQX4fAiRuOwZf+kGLOLbZQ2XJgEEavblhIvxYH2JQ5c5fsUU8EILFtgQkvmB8EzVeDERfn60TcV98EWaRC3tcmpw2/kr8QQ4BF8CSXAe6BKDY7u7Fy1tVj/2ete9GyZsTNdsSrfKrlCsnq9M3vC7GO8ePv21YL+yUfwd3TL5rBtz5XCc2E8+DpE8/OuVpFcOprzMrehWWdK7iEIACll0Pe23t9zQCsJeIQNS6T42WEiqg6geoWBTfcy/sQtMXsm6U1A4WbeY42q3cwt8Hn1XglVYKqbGDgvDYDEr9RmJqNX4m6nlhe5scEpzy//te94yR1qlUoMATV3DlwdFNBnop3jVkUMZTWCQWCLa1bx3+iViKa39V+uGNXyw9bVyOTo9Wlk6qEsnu0n8nDuQJPIoEXaw9B5ad18WyB0J2sJ29imteLbTkerGpCAkbVMV8LP7wGmXmYEfeWeA1eWpQBaplBPUpTiE5Ol+cSAAdY=
