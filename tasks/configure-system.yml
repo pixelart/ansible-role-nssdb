@@ -16,7 +16,7 @@
     path: '{{ nssdb_system_path }}'
     state: directory
   register: nssdb_folder_created
-  when: nssdb_stat is defined and nssdb_stat.stat.exists == false
+  when: nssdb_stat is defined and nssdb_stat.stat is defined and nssdb_stat.stat.exists == false
 
 - name: Initialize db in system-wide {{ nssdb_system_path }}
   command: certutil -N -d sql:{{ nssdb_system_path }} --empty-password
