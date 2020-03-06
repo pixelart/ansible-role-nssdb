@@ -20,7 +20,7 @@
 
 - name: Initialize db in system-wide {{ nssdb_system_path }}
   command: certutil -N -d sql:{{ nssdb_system_path }} --empty-password
-  when: nssdb_folder_created|changed
+  when: nssdb_folder_created.changed
 
 - name: Install certificates to system-wide {{ nssdb_system_path }}
   command: >
